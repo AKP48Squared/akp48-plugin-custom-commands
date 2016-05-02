@@ -29,18 +29,14 @@ Custom.prototype.handleCommand = function (message, context, res) {
   var command = text[0];
   text.shift();
 
-  var done = false;
-
   context.text = text.join(' ');
 
   if(command.toLowerCase() === 'addcustom') {
     res(this.addCustom(context));
-    done = true;
   }
 
   if(command.toLowerCase() === 'rmcustom') {
     res(this.rmCustom(context));
-    done = true;
   }
 
   for (var i = 0; i < this.commands.length; i++) {
@@ -57,12 +53,7 @@ Custom.prototype.handleCommand = function (message, context, res) {
       }
 
       res(out);
-      done = true;
     }
-  }
-
-  if(!done) {
-    res(null);
   }
 
   context.text = context.originalText;
