@@ -11,7 +11,7 @@ class Custom extends MessageHandlerPlugin {
     } catch(e) {
       this.commands = [];
       if(e instanceof SyntaxError) {
-        GLOBAL.logger.error(`${this._pluginName}: Error loading commands. Check your JSON for errors. Disabling saving so you don't lose any data.`);
+        global.logger.error(`${this._pluginName}: Error loading commands. Check your JSON for errors. Disabling saving so you don't lose any data.`);
         this.disableSaving = true;
       } else if (e.code === 'MODULE_NOT_FOUND') {
         this.saveCmds();
@@ -21,7 +21,7 @@ class Custom extends MessageHandlerPlugin {
 }
 
 Custom.prototype.handleCommand = function (message, context, res) {
-  GLOBAL.logger.silly(`${this._pluginName}: Received command.`);
+  global.logger.silly(`${this._pluginName}: Received command.`);
 
   // prepare text.
   context.originalText = context.text;
@@ -44,7 +44,7 @@ Custom.prototype.handleCommand = function (message, context, res) {
     if(cmd.name.toLowerCase() === command.toLowerCase() &&
        cmd.instanceId === context.instanceId && cmd.channel === context.to) {
 
-      GLOBAL.logger.silly(`${this._pluginName}: Handling ${cmd.name}`);
+      global.logger.silly(`${this._pluginName}: Handling ${cmd.name}`);
       var out = this.commands[i].response;
 
       if(context.text) {
@@ -60,7 +60,7 @@ Custom.prototype.handleCommand = function (message, context, res) {
 };
 
 Custom.prototype.addCustom = function (context) {
-  GLOBAL.logger.silly(`${this._pluginName}: Handling addCustom.`);
+  global.logger.silly(`${this._pluginName}: Handling addCustom.`);
   //TODO: permissions check.
   var text = context.text.split(' ');
   var cmdName = text[0];
@@ -82,7 +82,7 @@ Custom.prototype.addCustom = function (context) {
 };
 
 Custom.prototype.rmCustom = function (context) {
-  GLOBAL.logger.silly(`${this._pluginName}: Handling rmCustom.`);
+  global.logger.silly(`${this._pluginName}: Handling rmCustom.`);
   //TODO: permissions check.
   var text = context.text.split(' ');
   var cmdName = text[0];
@@ -107,11 +107,11 @@ Custom.prototype.rmCustom = function (context) {
 
 Custom.prototype.saveCmds = function () {
   if(this.disableSaving) {
-    GLOBAL.logger.silly(`${this._pluginName}: Saving disabled.`);
+    global.logger.silly(`${this._pluginName}: Saving disabled.`);
     return;
   }
 
-  GLOBAL.logger.silly(`${this._pluginName}: Saving commands.json.`);
+  global.logger.silly(`${this._pluginName}: Saving commands.json.`);
   jf.writeFileSync(path.join(__dirname, 'commands.json'), this.commands);
 };
 
