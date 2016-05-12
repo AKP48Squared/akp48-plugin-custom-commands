@@ -1,6 +1,6 @@
 {
   "name": "akp48-plugin-custom-commands",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Custom Commands plugin for AKP48. Allows channels to have their own defined commands.",
   "main": "main.js",
   "scripts": {
