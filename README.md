@@ -2,7 +2,7 @@ This plugin allows channels to define their own commands for AKP48Squared to res
 
 # Installation
 
-This plugin is included by default on new installations of AKP48Squared. If, for some reason, you need to manually install it, or you would like to update to the latest version on GitHub (we don't recommend this, as there may be incompatibilities in the master branch), you will need to remove `akp48-plugin-custom-commands` from the dependencies listed in AKP48's `package.json` file. Once this is done, you can `git clone` this repo into your plugins directory, or download this repo as a zip file and extract it to the plugins directory.
+This plugin is included by default on new installations of AKP48Squared. No further installation is needed.
 
 # Usage
 See the commands section below for detailed information on the usage of commands. The basics are pretty simple. You use `addCustom` to add your command, then your users can use the command. For example, in a default IRC instance, if you were to do `.addCustom test This is a test.`, users in the channel could then do `.test`, which would result in AKP48Squared responding to them, "This is a test."
@@ -25,4 +25,4 @@ custom-commands saves all of its command data to a file called `commands.json` i
 
 # Issues
 
-If you come across any issues, you can report them on this GitHub repo [here](https://github.com/AKP48Squared/akp48-plugin-custom-commands/issues).
+If you come across any issues, you can report them on this GitHub repo [here](https://github.com/AKP48Squared/custom-commands/issues).

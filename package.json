@@ -14,10 +14,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AKP48Squared/akp48-plugin-custom-commands.git"
+    "url": "git+https://github.com/AKP48Squared/custom-commands.git"
   },
   "bugs": {
-    "url": "https://github.com/AKP48Squared/akp48-plugin-custom-commands/issues"
+    "url": "https://github.com/AKP48Squared/custom-commands/issues"
   },
-  "homepage": "https://github.com/AKP48Squared/akp48-plugin-custom-commands"
+  "homepage": "https://github.com/AKP48Squared/custom-commands"
 }

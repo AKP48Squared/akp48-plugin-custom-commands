@@ -1,9 +1,8 @@
 'use strict';
-const MessageHandlerPlugin = require('../../lib/MessageHandlerPlugin');
 const jf = require('jsonfile');
 const path = require('path');
 
-class Custom extends MessageHandlerPlugin {
+class Custom extends global.AKP48.pluginTypes.MessageHandler {
   constructor(AKP48) {
     super('Custom Commands', AKP48);
     try {
