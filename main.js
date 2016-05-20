@@ -116,3 +116,4 @@ Custom.prototype.saveCmds = function () {
 
 module.exports = Custom;
 module.exports.type = 'MessageHandler';
+module.exports.pluginName = 'custom-commands';
