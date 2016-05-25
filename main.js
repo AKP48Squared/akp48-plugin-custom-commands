@@ -1,20 +1,12 @@
 'use strict';
-const jf = require('jsonfile');
-const path = require('path');
 
 class Custom extends global.AKP48.pluginTypes.MessageHandler {
-  constructor(AKP48) {
+  constructor(AKP48, config) {
     super('Custom Commands', AKP48);
-    try {
-      this.commands = require('./commands.json');
-    } catch(e) {
-      this.commands = [];
-      if(e instanceof SyntaxError) {
-        global.logger.error(`${this._pluginName}: Error loading commands. Check your JSON for errors. Disabling saving so you don't lose any data.`);
-        this.disableSaving = true;
-      } else if (e.code === 'MODULE_NOT_FOUND') {
-        this.saveCmds();
-      }
+    this._config = config;
+    if(!this._config) {
+      global.logger.error(`${this._pluginName}: No config loaded.`);
+      this._config = [];
     }
   }
 }
@@ -38,13 +30,13 @@ Custom.prototype.handleCommand = function (message, context, res) {
     res(this.rmCustom(context));
   }
 
-  for (var i = 0; i < this.commands.length; i++) {
-    var cmd = this.commands[i];
+  for (var i = 0; i < this._config.length; i++) {
+    var cmd = this._config[i];
     if(cmd.name.toLowerCase() === command.toLowerCase() &&
        cmd.instanceId === context.instanceId && cmd.channel === context.to) {
 
       global.logger.silly(`${this._pluginName}: Handling ${cmd.name}`);
-      var out = this.commands[i].response;
+      var out = this._config[i].response;
 
       if(context.text) {
         out = `${context.text}: ${out}`;
@@ -73,7 +65,7 @@ Custom.prototype.addCustom = function (context) {
     channel: context.to
   };
 
-  this.commands.push(cmd);
+  this.config.commands.push(cmd);
 
   this.saveCmds();
 
@@ -87,11 +79,11 @@ Custom.prototype.rmCustom = function (context) {
   var cmdName = text[0];
   var changed = false;
 
-  for (var i = 0; i < this.commands.length; i++) {
-    var cmd = this.commands[i];
+  for (var i = 0; i < this._config.length; i++) {
+    var cmd = this._config[i];
     if(cmd.name.toLowerCase() === cmdName.toLowerCase() &&
        cmd.instanceId === context.instanceId && cmd.channel === context.to) {
-      this.commands.splice(i, 1);
+      this._config.splice(i, 1);
       changed = true;
     }
   }
@@ -111,7 +103,7 @@ Custom.prototype.saveCmds = function () {
   }
 
   global.logger.silly(`${this._pluginName}: Saving commands.json.`);
-  jf.writeFileSync(path.join(__dirname, 'commands.json'), this.commands);
+  this._AKP48.saveConfig(this._config, 'custom-commands');
 };
 
 module.exports = Custom;
