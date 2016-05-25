@@ -65,7 +65,7 @@ Custom.prototype.addCustom = function (context) {
     channel: context.to
   };
 
-  this.config.commands.push(cmd);
+  this._config.push(cmd);
 
   this.saveCmds();
 
