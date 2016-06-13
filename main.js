@@ -94,7 +94,6 @@ Custom.prototype.saveCmds = function () {
     return;
   }
 
-  global.logger.silly(`${this.name}: Saving commands.json.`);
   this.saveConfig();
 };
 
